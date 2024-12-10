@@ -1,0 +1,217 @@
+basePath: /v2
+definitions:
+  handler.CreateTodoPayload:
+    properties:
+      is_completed:
+        type: boolean
+      todo:
+        type: string
+    type: object
+  handler.DeletePayload:
+    properties:
+      id:
+        type: string
+    type: object
+  handler.GetAllTodoResp:
+    properties:
+      count:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/handler.TodoResponseData'
+        type: array
+    type: object
+  handler.Response:
+    properties:
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+  handler.SignUpResponse:
+    properties:
+      data:
+        $ref: '#/definitions/handler.SignupResponseData'
+    type: object
+  handler.SignupResponseData:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      token:
+        type: string
+    type: object
+  handler.TodoResponseData:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      is_completed:
+        type: boolean
+      name:
+        type: string
+      todo:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handler.UpdateTodoPayload:
+    properties:
+      id:
+        type: string
+      is_completed:
+        type: boolean
+      todo:
+        type: string
+    type: object
+  validation.LoginReqestBody:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  validation.RequestBody:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    type: object
+host: petstore.swagger.io
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: Todo Application by Shyam Mahanta.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Todo Swagger
+  version: "1.0"
+paths:
+  /api/v1/create-todo:
+    post:
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateTodoPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Response'
+      tags:
+      - Todo
+  /api/v1/delete-todo:
+    post:
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.DeletePayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Response'
+      tags:
+      - Todo
+  /api/v1/get-all-todo:
+    get:
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        required: true
+        type: string
+      - description: offset
+        in: query
+        name: offset
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetAllTodoResp'
+      tags:
+      - Todo
+  /api/v1/login:
+    post:
+      parameters:
+      - description: Login Credentials
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/validation.LoginReqestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.SignUpResponse'
+      tags:
+      - Authentication
+  /api/v1/signup:
+    post:
+      parameters:
+      - description: Signup Credentials
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/validation.RequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.SignupResponseData'
+      tags:
+      - Authentication
+  /api/v1/update-todo:
+    post:
+      parameters:
+      - description: Request Body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateTodoPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Response'
+      tags:
+      - Todo
+swagger: "2.0"
