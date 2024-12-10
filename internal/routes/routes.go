@@ -9,7 +9,7 @@ const (
 	LOGIN        = "/login"
 	SIGNUP       = "/signup"
 	HEALTH       = "/health"
-	CREATE_TODO  = "/create_todo"
+	CREATE_TODO  = "/create-todo"
 	GET_ALL_TODO = "/get-all-todo"
 	UPDATE_TODO  = "/update-todo"
 	DELETE_TODO  = "/delete-todo"
